@@ -3,7 +3,7 @@ import "source-map-support/register";
 import * as cdk from "@aws-cdk/core";
 import { env } from "../lib/util/env";
 import { NewStackProps } from "../lib/stack-config";
-import { EcrStack } from "../lib/ecr";
+import { LambdaStack } from "../lib/hello";
 
 (async function () {
   const branchName = env("BRANCH_NAME");
@@ -21,7 +21,7 @@ import { EcrStack } from "../lib/ecr";
   });
 
   const app = new cdk.App();
-  new EcrStack(app, `${stackPrefix}-ecr-${branchName}`, stackProps);
+  new LambdaStack(app, `${stackPrefix}-ecr-${branchName}`, stackProps);
 
   app.synth();
 })().catch((e) => {
