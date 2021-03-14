@@ -10,6 +10,7 @@ def hello(event, context):
     print("hello")
 `;
     new lambda.Function(this, `${id}-lambda`, {
+      functionName: id,
       runtime: lambda.Runtime.PYTHON_3_6,
       code: lambda.Code.fromInline(code),
       handler: "index.hello",
