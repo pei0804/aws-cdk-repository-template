@@ -1,12 +1,14 @@
-AWS_PROFILE:=default
-AWS_DEFAULT_REGION:=ap-northeast-1
-BRANCH_NAME:= $(subst _,-,$(subst /,-,$(shell git branch --show-current)))
-CDK:=BRANCH_NAME=$(BRANCH_NAME) AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) AWS_PROFILE=$(AWS_PROFILE) npx cdk
-STACK_NAME:="cdk-template"
+AWS_PROFILE := default
+AWS_DEFAULT_REGION := ap-northeast-1
+TARGET := "*"
+BRANCH_NAME := $(subst _,-,$(subst /,-,$(shell git branch --show-current)))
 
-.PHONY: package
-package:
-	$(MAKE) -C ../ package
+DOCKER_CDK = docker-compose run --rm \
+	-e AWS_PROFILE=$(AWS_PROFILE) \
+	-e AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) \
+	-e CDK_DEFAULT_REGION=$(AWS_DEFAULT_REGION) \
+	-e BRANCH_NAME=$(BRANCH_NAME) \
+	cdk npx aws-cdk
 
 .PHONY: init
 install:
@@ -21,21 +23,21 @@ fmt:
 	npm run fmt
 
 .PHONY: list
-list: package
-	$(CDK) list
+list:
+	$(DOCKER_CDK) list
 
 .PHONY: synth
-synth: package
-	$(CDK) synth $(STACK_NAME)
+synth:
+	$(DOCKER_CDK) synth $(TARGET)
 
 .PHONY: deploy
-deploy: package
-	$(CDK) deploy $(STACK_NAME)
+deploy:
+	$(DOCKER_CDK) deploy $(TARGET)
 
 .PHONY: destroy
-destroy: package
-	$(CDK) destroy $(STACK_NAME)
+destroy:
+	$(DOCKER_CDK) destroy $(TARGET)
 
 .PHONY: diff
-diff: package
-	$(CDK) diff $(STACK_NAME)
+diff:
+	$(DOCKER_CDK) diff $(TARGET)

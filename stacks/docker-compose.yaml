@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  cdk:
+    build: .
+    volumes:
+      - ~/.aws:/root/.aws:ro
+      - ~/.aws:/tmp/aws:ro
+      - ../:/app/:delegated
+    working_dir: /app/stacks
+    environment:
+      - AWS_PROFILE=${AWS_PROFILE:-default}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-ap-northeast-1}
+      - BRANCH_NAME=${BRANCH_NAME:-main}
+      - AWS_CONFIG_FILE=/tmp/aws/config
+      - AWS_SHARED_CREDENTIALS_FILE=/tmp/aws/credentials

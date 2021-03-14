@@ -23,7 +23,11 @@
       "./node_modules/@types"
     ]
   },
+  "include": [ "**/*.ts" ],
   "exclude": [
-    "cdk.out"
+    "**/*.d.ts",
+    "cdk.out",
+    "dist",
+    "tmp"
   ]
 }
