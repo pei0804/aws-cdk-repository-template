@@ -1,0 +1,38 @@
+{
+  "name": "stacks",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "stacks": "bin/stacks.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "lint": "eslint '**/**.ts'",
+    "fmt": "eslint --fix '**/**.ts'"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.88.0",
+    "@types/jest": "26.0.20",
+    "@types/node": "10.17.44",
+    "@typescript-eslint/eslint-plugin": "4.5.0",
+    "@typescript-eslint/parser": "4.5.0",
+    "aws-cdk": "1.88.0",
+    "eslint": "7.12.1",
+    "eslint-config-prettier": "6.14.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "jest": "26.6.3",
+    "prettier": "2.1.2",
+    "ts-jest": "26.5.0",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.3"
+  },
+  "dependencies": {
+    "@aws-cdk/core": "1.88.0",
+    "aws-sdk": "2.782.0",
+    "simple-git": "2.21.0",
+    "source-map-support": "0.5.19"
+  }
+}
