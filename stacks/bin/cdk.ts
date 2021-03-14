@@ -11,11 +11,6 @@ import { HelloLambdaStack } from "../lib/hello-lambda";
   const stackPrefix = branchName === "main" ? "prod" : "dev";
 
   const stackProps = await NewStackProps({
-    // いらなそう
-    // env: {
-    //   account: process.env.CDK_DEFAULT_ACCOUNT,
-    //   region: process.env.CDK_DEFAULT_REGION,
-    // },
     tags: {
       Name: name,
     },
